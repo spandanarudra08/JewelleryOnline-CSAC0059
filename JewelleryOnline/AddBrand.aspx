@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Add Brand.aspx.cs" Inherits="JewelleryOnline.Add_Brand" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AddBrand.aspx.cs" Inherits="JewelleryOnline.Add_Brand" %>
 
 <!DOCTYPE html>
 
@@ -58,18 +58,16 @@ a {
        
   font-family: arial, sans-serif;
   border-collapse: collapse;
-  width: 70%;
+  width: 100%;
 }
 
-.brandDetails td, th {
-  border: 1px solid #dddddd;
+.brandDetails table td  {
+  width: 60px;
   text-align: center;
   padding: 8px;
 }
 
-.brandDetails tr:nth-child(even) {
-  background-color: #dddddd;
-}
+
 #txtBrand table{
     align-content:center;
             margin-left:250px;
@@ -86,6 +84,9 @@ a {
             color:white;
           margin-bottom: 50px;
         }
+.rowStyle{
+    background-color:#dddddd;
+}
 .auto-style1 {
             height: 71px;
         }
@@ -133,17 +134,6 @@ a {
          <div Id="txtBrand">
        <table>
           <tr>
-            <td class="auto-style1">
-            <div style="font-size: large; color: black; font-weight: bold">
-                Brand Name
-                </div>
-            </td>
-            <td class="auto-style3">
-                <asp:TextBox ID="txtBrandname" class="text-style" runat="server"  Width="240px" Height="30px"></asp:TextBox>
-                
-            </td>
-        </tr>
-        <tr>
             <td>
             <div style="font-size: large; color: black; font-weight: bold">
                 Brand ID
@@ -154,12 +144,33 @@ a {
                 
             </td>
         </tr>
-         <tr>
+        <tr>
+             <td class="auto-style1">
+            <div style="font-size: large; color: black; font-weight: bold">
+                Brand Name
+                </div>
+            </td>
+            <td class="auto-style3">
+                <asp:TextBox ID="txtBrandname" class="text-style" runat="server"  Width="240px" Height="30px"></asp:TextBox>
+                
+            </td>
+           
+        </tr>
+            <tr>
+            <td class="auto-style1">
+            <div style="font-size: large; color: black; font-weight: bold">
+                Number Of Products
+                </div>
+            </td>
+            <td class="auto-style3">
+                <asp:TextBox ID="txtNoOfProducts" class="text-style" runat="server"  Width="240px" Height="30px"></asp:TextBox>
+                
+            </td>
         </tr>
         <tr>
             <td></td>
             <td colspan="1" class="auto-style2" >
-                <asp:Button ID="btnAddBrand" class="btn-style" runat="server" Text="Add" />
+                <asp:Button ID="btnAddBrand" class="btn-style" runat="server" Text="Add" OnClick="btnAddBrand_Click" />
             
                     </td>
              
@@ -167,40 +178,55 @@ a {
            </table>
              </div>
     <div class="brandDetails" align="center">
-        <table>
-            <tr>
-                <th>Brand ID</th>
-                <th>Brand Name</th>
-                <th>Edit</th>
-                <th>Delete</th>
-            </tr>
-            <tr>
-                <td>CTID001</td>
-                <td>Kate Spade</td>
-                <td><asp:Image ID="Image3" ImageUrl="~/images/editBold.png" runat="server" align="centre" Height="17px" Width="20px" /></td>
+        <asp:SqlDataSource ID="SqlDataSource2" runat="server"></asp:SqlDataSource>
+           
+         <br />
+            <br />
+           
+            <asp:DataList ID="DataList1" runat="server" BorderColor="Black" BorderStyle="None" Width="893px">
+                <HeaderTemplate>
+                   <table>
+                <tr class="rowStyle">
+                <td>Brand ID</td>
+                <td>Brand Name</td>
+                <td>Number Of Products</td>
 
-                <td><asp:Image ID="Image1" ImageUrl="~/images/delete.png" runat="server" align="centre" Height="17px" Width="20px" /></td>
-  
-            </tr>
-            <tr>
-                <td>CTID002</td>
-                <td>Cezanne</td>
-                <td><asp:Image ID="Image4" ImageUrl="~/images/editBold.png" runat="server" align="centre" Height="17px" Width="20px" /></td>
-
-                <td><asp:Image ID="Image5" ImageUrl="~/images/delete.png" runat="server" align="centre" Height="17px" Width="20px" /></td>
-  
-            </tr>
-            <tr>
-                <td>CTID003</td>
-                <td>Swarovski</td>
-                <td><asp:Image ID="Image6" ImageUrl="~/images/editBold.png" runat="server" align="centre" Height="17px" Width="20px" /></td>
-
-                <td><asp:Image ID="Image7" ImageUrl="~/images/delete.png" runat="server" align="centre" Height="17px" Width="20px" /></td>
-  
-            </tr>
+                <td>Edit</td>
+                <td>Delete</td>
+                
+                </tr>
+                       </table>
+                   </HeaderTemplate>
+                <ItemTemplate>
+          <table>
             
-    </table>
-  </div>
+                        <tr>
+                            <td><%#Eval("Brand_Id")%>
+                            <td><%#Eval("Brand_Name")%>
+                            <td><%#Eval("NumberOfProducts")%>
+                                <td>
+                    <asp:ImageButton ID="EdtButton1" ImageUrl="~/images/editBold.png"  runat="server" align="centre" Height="17px" Width="20px"  OnClick="EdtButton1_Click"/>
+                </td>
+
+                <td> <asp:ImageButton ID="DltButton1" ImageUrl="~/images/delete.png"  runat="server" align="centre" Height="17px" Width="20px" />
+</td>
+                            
+                            
+                             
+   
+
+
+
+
+                            </tr>
+                    </table>
+                    </ItemTemplate>
+
+            </asp:DataList>
+            <br />
+        </div>
+       
+ 
     </form>
 </body>
 </html>

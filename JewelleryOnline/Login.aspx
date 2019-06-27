@@ -98,18 +98,22 @@
             <td>
             </td>
         </tr>
+            </div>
+        <div style="font-size: large; color: black; font-weight: bold">
         <tr>
             <td colspan="1" class="auto-style2" >
                 <asp:Button ID="btnLogin" class="btn-style" runat="server" Text="Login" OnClick="btnLogin_Click" />
             
                     </td>
-            <asp:Label ID="lblmsg" runat="server"></asp:Label>
-            
-             <td colspan="1" class="auto-style2" >
-                <asp:Button ID="Button1" class="btn-style" runat="server" Text="Signup" OnClick="btnSignUp_Click" />
+            <td colspan="1" class="auto-style2" >
+                <asp:Button ID="btnSignUp" class="btn-style" runat="server" Text="Signup" OnClick="btnSignUp_Click" CausesValidation="False" />
             
                     </td>
+            <asp:Label ID="lblmsg" runat="server"></asp:Label>
+            
+             
             </tr>
+
             <tr>
                 <td colspan="2">
                     &nbsp;</td>

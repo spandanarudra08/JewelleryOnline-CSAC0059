@@ -65,18 +65,40 @@ a {
         </div>
 
          <div style="padding-right:100px; height: 40px; width: 1264px;" align="right" >
-                <asp:Button  ID="Button1" class="btnStyle" runat="server" Text="Add Brand"  />
+                <asp:Button  ID="Button1" class="btnStyle" runat="server" Text="Add Brand" OnClick="BtnAdd_Click"   />
             &nbsp &nbsp &nbsp &nbsp &nbsp
-                <asp:Button  ID="Button2" class="btnStyle" runat="server" Text="Add Product"  />
-             </div>
-          <div align="center">
-         <h2 >
-                     Inventory has no data - Please add brands and Products
-                </h2>
-      
-           </div>
+                <asp:Button  ID="Button2" class="btnStyle" runat="server" Text="Add Product" OnClick="BtnAdd2_Click"  />
+             </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         <br/>
+        <div >
+        <table align="center">
+
         
- 
+        <tr>
+        
+            <td>
+                   <asp:GridView ID="GridView3" runat="server">
+                   </asp:GridView>
+            </td>
+            
+    
+         
+            <td>
+                </td>
+       
+       
+            
+            <td>
+                    <asp:GridView ID="GridView1" runat="server">
+                   </asp:GridView>
+            </td>
+        </tr>
+            <tr>
+                <asp:Label ID="lblmsg"  runat="server" Text="Label" style="color:Red;  font-weight:bold; font-display:block;"></asp:Label>
+                </tr>
+    </table>
+           
+    </div>
     </form>
 </body>
 </html>

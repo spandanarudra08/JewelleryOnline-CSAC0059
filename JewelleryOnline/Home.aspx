@@ -71,7 +71,7 @@ a {
                      Inventory  Details 
                 </h2>
          <div style="padding-right:100px; height: 40px; width: 1264px;" align="right" >
-                <asp:Button  ID="Button1" class="btnStyle" runat="server" Text="Add Brand"  />
+                <asp:Button  ID="Button1" class="btnStyle" runat="server" Text="Add Brand" OnClick="Button1_Click"  />
             &nbsp &nbsp &nbsp &nbsp &nbsp
                 <asp:Button  ID="Button2" class="btnStyle" runat="server" Text="Add Product"  />
         
@@ -120,7 +120,7 @@ a {
                           
                            
                            <asp:BoundField DataField="Product_Name" HeaderText="Product_Name" SortExpression="Product_Name" />
-                           <asp:BoundField DataField="Available_Quantity" HeaderText="Available_Quantity" SortExpression="Available_Quantity" />
+                           <asp:BoundField DataField="Available_Qty" HeaderText="Available_Quantity" SortExpression="Available_Quantity" />
                            <asp:BoundField DataField="Brand_Name" HeaderText="Brand_Name" SortExpression="Brand_Name" />
                       
                            </Columns>

@@ -57,18 +57,23 @@ a {
        
   font-family: arial, sans-serif;
   border-collapse: collapse;
-  width: 70%;
-}
+  width: 100%;
+  
 
- #brandData td, th {
-  border: 1px solid #dddddd;
-  text-align: center;
-  padding: 8px;
 }
+  #brandData table td {
+           
+           width:60px;
+            text-align: center;
+            padding: 8px;
+        }
 
- #brandData tr:nth-child(even) {
-  background-color: #dddddd;
-}
+
+
+ .rowStyle {
+     background-color: #dddddd;
+ }
+
 
 </style>
 </head>
@@ -107,42 +112,47 @@ a {
                 <asp:Button  ID="Button1" class="btnStyle"  runat="server" Text="Add Brand" OnClick="btnAddBrand_Click" />
             
              </div>
-    <div align="center" id="brandData">
-        <table>
-            <tr>
-                <th>Brand ID</th>
-                <th>Brand Name</th>
-                <th>Edit</th>
-                <th>Delete</th>
-            </tr>
-            <tr>
-                <td>CTID001</td>
-                <td>Kate Spade</td>
-                <td><asp:Image ID="Image3" ImageUrl="~/images/editBold.png" runat="server" align="centre" Height="17px" Width="20px" /></td>
-
-                <td><asp:Image ID="Image1" ImageUrl="~/images/delete.png" runat="server" align="centre" Height="17px" Width="20px" /></td>
-  
-            </tr>
-            <tr>
-                <td>CTID002</td>
-                <td>Cezanne</td>
-                <td><asp:Image ID="Image4" ImageUrl="~/images/editBold.png" runat="server" align="centre" Height="17px" Width="20px" /></td>
-
-                <td><asp:Image ID="Image5" ImageUrl="~/images/delete.png" runat="server" align="centre" Height="17px" Width="20px" /></td>
-  
-            </tr>
-            <tr>
-                <td>CTID003</td>
-                <td>Swarovski</td>
-                <td><asp:Image ID="Image6" ImageUrl="~/images/editBold.png" runat="server" align="centre" Height="17px" Width="20px" /></td>
-
-                <td><asp:Image ID="Image7" ImageUrl="~/images/delete.png" runat="server" align="centre" Height="17px" Width="20px" /></td>
-  
-            </tr>
-            
-    </table>
-  </div>
+    <div id="brandData" align="center">
+        <asp:SqlDataSource ID="SqlDataSource2" runat="server"></asp:SqlDataSource>
+           
         
+            <br />
+            <br />
+            <asp:DataList ID="DataList1" runat="server" BorderColor="Black" BorderStyle="None" Width="893px" OnSelectedIndexChanged="DataList1_SelectedIndexChanged1">
+               <HeaderTemplate>
+                   <table>
+                <tr class="rowStyle">
+                <td>Brand ID</td>
+                <td>Brand Name</td>
+                <td>Edit</td>
+                <td>Delete</td>
+                
+                </tr>
+                       </table>
+                   </HeaderTemplate>
+                <ItemTemplate>
+                    <table>
+                
+                
+                         
+                        <tr>
+                            <td><%#Eval("Brand_Id")%>
+                            <td><%#Eval("Brand_Name")%>
+                            
+                             <td><asp:ImageButton ID="EdtButton1" ImageUrl="~/images/editBold.png"  runat="server" align="centre" Height="17px" Width="20px"  OnClick="EdtButton1_Click" /></td>
+
+                <td><asp:ImageButton ID="DltButton1" ImageUrl="~/images/delete.png"  runat="server" align="centre" Height="17px" Width="20px"  /></td>
+                   
+                            
+                             
+                      </tr>
+                
+                    </table>
+                    </ItemTemplate>
+
+            </asp:DataList>
+            <br />
+        </div>
 </form>
 </body>
 </html>
