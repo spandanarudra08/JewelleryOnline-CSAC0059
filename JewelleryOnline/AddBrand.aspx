@@ -70,7 +70,7 @@ a {
 
 #txtBrand table{
     align-content:center;
-            margin-left:250px;
+            margin-left:150px;
 }
 #txtBrand  .btn-style
         {   
@@ -212,13 +212,7 @@ a {
 </td>
                             
                             
-                             
-   
-
-
-
-
-                            </tr>
+                    </tr>
                     </table>
                     </ItemTemplate>
 
