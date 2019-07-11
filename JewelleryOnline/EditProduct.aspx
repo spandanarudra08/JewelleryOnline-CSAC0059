@@ -237,9 +237,9 @@ a {
                             <td><%#Eval("Available_Qty")%>
 
                                 <td>
-                    <asp:ImageButton ID="EdtButton1" ImageUrl="~/images/editBold.png"  runat="server" align="centre" Height="17px" Width="20px" /> </td>
+                    <asp:ImageButton ID="EdtButton1" ImageUrl="~/images/editBold.png"  runat="server" align="centre" Height="17px" Width="20px" OnClick="EdtButton1_Click"/> </td>
 
-                <td> <asp:ImageButton ID="DltButton1" ImageUrl="~/images/delete.png"  runat="server" align="centre" Height="17px" Width="20px" /></td>
+                <td> <asp:ImageButton ID="DltButton1" ImageUrl="~/images/delete.png"  runat="server" align="centre" Height="17px" Width="20px" OnClick="btnDeleteProduct_Click"/></td>
                             
                  </tr>
                 </table>

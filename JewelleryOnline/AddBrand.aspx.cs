@@ -67,5 +67,24 @@ namespace JewelleryOnline
         {
             Response.Redirect("Edit Brand.aspx");
         }
+        protected void btnDeleteBrand_Click(object sender, ImageClickEventArgs e)
+        {
+            string query = "delete from Brand_Details where Brand_Id='" + txtBrandID.Text + "'";
+            SqlConnection con = new SqlConnection(ConnectionString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = query;
+            cmd.Connection = con;
+
+            DataTable dt = new DataTable();
+
+
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+
+            da.Fill(dt);
+            DataList1.DataSource = dt;
+            DataList1.DataBind();
+            con.Close();
+        }
     }
 }
