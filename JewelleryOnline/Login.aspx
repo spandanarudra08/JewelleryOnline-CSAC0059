@@ -5,12 +5,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <style>
 
         table{
             
             align-content:center;
             margin-left:250px;
+            width: 20%;
         }
 
         .text-style
@@ -24,7 +27,7 @@
         {   
             
             background-color: #4A274F ;
-            margin-left:90px;
+            margin-left:70px;
             width: 75px;
             height: 40px;
             font-size:medium;
@@ -109,7 +112,7 @@
                 <asp:Button ID="btnSignUp" class="btn-style" runat="server" Text="Signup" OnClick="btnSignUp_Click" CausesValidation="False" />
             
                     </td>
-            <asp:Label ID="lblmsg" runat="server"></asp:Label>
+            <asp:Label ID="lblmsg" style="color:green;font:100"  runat="server"></asp:Label>
             
              
             </tr>

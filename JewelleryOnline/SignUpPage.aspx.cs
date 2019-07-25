@@ -16,12 +16,12 @@ namespace JewelleryOnline
     {
         private string message = string.Empty;
 
-        protected void Page_Load(object sender, EventArgs e)
-        {
-
-            ValidationSettings.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
-
-        }
+        //protected void Page_Load(object sender, EventArgs e)
+        //{
+        //    if (!this.IsPostBack)
+        //    {
+        //    }
+        //}
 
         protected void Button1_Click(object sender, EventArgs e)
         {
@@ -36,6 +36,7 @@ namespace JewelleryOnline
 
                     string UserName = txtUsername.Text;
                     string Password = txtPassword.Text;
+
                     string ConfirmPassword = txtPassword1.Text;
                     SqlConnection con = new SqlConnection("Data Source=DESKTOP-OGOCGH7\\SQLEXPRESS;Initial Catalog=JewelleryOnlineDB;Integrated Security=True");
                     con.Open();
@@ -45,13 +46,13 @@ namespace JewelleryOnline
                     cmd.Parameters.AddWithValue("@Password", Password);
                     cmd.Parameters.AddWithValue("@ConfirmPassword", ConfirmPassword);
                     cmd.Parameters.Add("@ERROR", SqlDbType.Char, 1000);
-                    cmd.Parameters["@ERROR"].Direction = ParameterDirection.Output;
-                    string message = (string)cmd.Parameters["@ERROR"].Value;
+                    cmd.Parameters["@ERROR"].Direction = ParameterDirection.Output; 
 
                     cmd.ExecuteNonQuery();
+                    string message = (string)cmd.Parameters["@ERROR"].Value;
 
                     con.Close();
-                    
+
                 }
                 else
                 {
@@ -61,13 +62,13 @@ namespace JewelleryOnline
             }
             else
             {
-                Response.Write("Invalid captcha");
+                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "Information", "alert('Invalid captcha.')", true);
             }
-            
+
         }
     }
 }
 
 
-    
-    
+
+

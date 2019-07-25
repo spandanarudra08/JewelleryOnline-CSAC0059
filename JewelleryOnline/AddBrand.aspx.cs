@@ -17,20 +17,9 @@ namespace JewelleryOnline
         {
             if (!IsPostBack)
             {
-                string query = "select Brand_Id,Brand_Name,NumberOfProducts from Brand_Details";
-                SqlConnection con = new SqlConnection(ConnectionString);
-                SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = query;
-                cmd.Connection = con;
-                DataTable dt = new DataTable();
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                da.Fill(dt);
-                DataList1.DataSource = dt;
-                DataList1.DataBind();
-               
-                con.Close();
+                BindProducts();
             }
-            
+
         }
         protected void DataList1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -39,28 +28,36 @@ namespace JewelleryOnline
 
         protected void btnAddBrand_Click(object sender, EventArgs e)
         {
+            lblMsg.Visible = false;
 
-            
-                string query = "insert into Brand_Details values('" + txtBrandID.Text + "','" + txtBrandname.Text  + "','" + txtNoOfProducts.Text + "')";
-                SqlConnection con = new SqlConnection(ConnectionString);
-                SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = query;
-                cmd.Connection = con;
-            
+            string query = "insert into Brand_Details values('" + txtBrandID.Text + "','" + txtBrandname.Text + "','" + txtNoOfProducts.Text + "')";
+            SqlConnection con = new SqlConnection(ConnectionString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = query;
+            cmd.Connection = con;
             DataTable dt = new DataTable();
-           
-
             SqlDataAdapter da = new SqlDataAdapter(cmd);
-            
-
             da.Fill(dt);
-                DataList1.DataSource = dt;
-                DataList1.DataBind();
-                con.Close();
+            con.Close();
+            BindProducts();
+            lblMsg.Visible = true;
+            lblMsg.Text = "Brand " + txtBrandname.Text + " added successfully";
+        }
 
-            
+        private void BindProducts()
+        {
+            string query = "select Brand_Id,Brand_Name,NumberOfProducts from Brand_Details";
+            SqlConnection con = new SqlConnection(ConnectionString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = query;
+            cmd.Connection = con;
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+            DataList1.DataSource = dt;
+            DataList1.DataBind();
 
-            
+            con.Close();
         }
 
         protected void EdtButton1_Click(object sender, ImageClickEventArgs e)
