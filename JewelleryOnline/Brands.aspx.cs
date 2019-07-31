@@ -15,6 +15,7 @@ namespace JewelleryOnline
         public string ConnectionString = "Data Source=DESKTOP-OGOCGH7\\SQLEXPRESS;Initial Catalog=JewelleryOnlineDB;Integrated Security=True";
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             if (!IsPostBack)
             {
                 string query = "select Brand_Id,Brand_Name from Brand_Details";
@@ -30,7 +31,6 @@ namespace JewelleryOnline
 
                 con.Close();
             }
-
         }
         protected void DataList1_SelectedIndexChanged1(object sender, EventArgs e)
         {

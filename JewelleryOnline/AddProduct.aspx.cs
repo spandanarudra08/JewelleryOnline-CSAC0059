@@ -21,8 +21,7 @@ namespace JewelleryOnline
 
             if (!IsPostBack)
             {
-                bindProducts();
-                string query = "select Product_Id,Brand_Id,Product_Name,Sales_Price,Available_Qty from Product_Details";
+                string query = "select *,Brand_Name from Product_Details pd LEFT OUTER JOIN Brand_Details bd ON pd.Brand_Id = bd.Brand_Id";
                 SqlConnection con = new SqlConnection(ConnectionString);
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = query;
@@ -37,10 +36,15 @@ namespace JewelleryOnline
 
                 con.Close();
                 BindBrands();
+                //if (Session["ProductEditMessage"] != null)
+                //{
+                //    lblProductEditMsg.Text = Session["ProductEditMessage"].ToString();
+                //}
+                
             }
             
         }
-        protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
+       /* protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
@@ -56,54 +60,32 @@ namespace JewelleryOnline
 
             }
 
-        }
-        protected void Gridview1_RowEditing(object sender, GridViewEditEventArgs e)
-        {
-            Gridview1.EditIndex = e.NewEditIndex;
-            bindProducts();
-        }
-        protected void Gridview1_RowUpdating(object sender, GridViewUpdateEventArgs e)
-        {
-            TextBox txtProductName = (TextBox)Gridview1.FooterRow.FindControl("txtnameProductname");
-            DropDownList txtBrand = (DropDownList)Gridview1.FooterRow.FindControl("txtBrand1");
-            TextBox txtPrice = (TextBox)Gridview1.FooterRow.FindControl("txtSalesPrice");
-            TextBox txtPID = (TextBox)Gridview1.FooterRow.FindControl("lblid");
-//update commands
-        }
-
-        protected void Gridview1_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-            //delete command
-            bindProducts();
-        }
+        }*/
 
 
-        protected void Gridview1_RowCommand(object sender, GridViewCommandEventArgs e)
+        private void bindProducts()
         {
-            if (e.CommandName.Equals("AddNew"))
-            {
+            string query = "select *,Brand_Name from Product_Details pd LEFT OUTER JOIN Brand_Details bd ON pd.Brand_Id = bd.Brand_Id";
+            //string query = "select Product_Id,Brand_Id,Product_Name,Sales_Price,Available_Qty from Product_Details";
 
-                TextBox txtProductName = (TextBox)Gridview1.FooterRow.FindControl("txtnameProductname1");
-                DropDownList txtBrand = (DropDownList)Gridview1.FooterRow.FindControl("txtBrand1");
-                TextBox txtPrice = (TextBox)Gridview1.FooterRow.FindControl("txtSalesPrice1");
+            SqlConnection con = new SqlConnection(ConnectionString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = query;
+            cmd.Connection = con;
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+            DataList1.DataSource = dt;
 
-                //ad = new SqlDataAdapter("INSERT INTO Tbl_Info(Name,State,City) Values('" + txtName.Text + "', '" + txtState.Text + "', '" + txtCity.Text + "')", conn);
-                //dt = new DataTable();
-                //ad.Fill(dt);
-                bindProducts();
-            }
+            DataList1.DataBind();
+
+
+            con.Close();
+
         }
 
-        protected void Gridview1_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            Gridview1.PageIndex = e.NewPageIndex;
-            bindProducts();
-        }
-        protected void Gridview1_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
-        {
-            Gridview1.EditIndex = -1;
-            bindProducts();
-        }
+
+
         public DataTable GetBrands()
         {
             DataTable dt = new DataTable();
@@ -150,56 +132,34 @@ namespace JewelleryOnline
                 
             }
         }
-        public void bindProducts()
-        {
-            using (SqlConnection conn = new SqlConnection(ConnectionString))
-            using (SqlCommand cmd = new SqlCommand("sp_GetAllProducts", conn))
-            {
-
-                SqlDataAdapter adapt = new SqlDataAdapter(cmd);
-                adapt.SelectCommand.CommandType = CommandType.StoredProcedure;
-
-                // fill the data table - no need to explicitly call `conn.Open()` - 
-                // the SqlDataAdapter automatically does this (and closes the connection, too)
-                DataTable dt = new DataTable();
-                adapt.Fill(dt);
-
-                Gridview1.DataSource = dt;
-                Gridview1.DataBind();
-
-            }
-           
-            
-        }
+        
         protected void btnAddProduct_Click(object sender, EventArgs e)
         {
-            string query = "insert into Product_Details values('" + txtProductID.Text + "','" + dropBrandList.SelectedItem.Text  + "','" + txtProductName.Text  + "','" + txtSales.Text  + "','" + txtQuantity.Text + "')";
+            string query = "insert into Product_Details values('" + dropBrandList.SelectedItem.Value  + "','" + txtProductName.Text  + "','" + txtSales.Text  + "','" + txtQuantity.Text + "')";
             SqlConnection con = new SqlConnection(ConnectionString);
             SqlCommand cmd = new SqlCommand();
             cmd.CommandText = query;
             cmd.Connection = con;
 
             DataTable dt = new DataTable();
-
-
             SqlDataAdapter da = new SqlDataAdapter(cmd);
-
-
             da.Fill(dt);
-            DataList1.DataSource = dt;
-            DataList1.DataBind();
             con.Close();
+            bindProducts();
         }
 
         protected void DataList1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
-        protected void EdtButton1_Click(object sender, ImageClickEventArgs e)
+       
+       
+        protected void BtnEdit_Click(object sender, EventArgs e)
         {
+            Button btn = sender as Button;
+            Session["EditProductId"] = btn.CommandArgument.ToString();
             Response.Redirect("EditProduct.aspx");
         }
-
         protected void btnDeleteProduct_Click(object sender, ImageClickEventArgs e)
         {
             string query = "delete from Product_Details where Product_ID='" + txtProductID.Text + "'";
@@ -207,17 +167,28 @@ namespace JewelleryOnline
             SqlCommand cmd = new SqlCommand();
             cmd.CommandText = query;
             cmd.Connection = con;
-
             DataTable dt = new DataTable();
-
-
             SqlDataAdapter da = new SqlDataAdapter(cmd);
-
-
             da.Fill(dt);
-            DataList1.DataSource = dt;
-            DataList1.DataBind();
             con.Close();
+        }
+
+        protected void BtnDelete_Click(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            string PID = btn.CommandArgument.ToString();
+            string query = "delete from Product_Details where Product_ID='" + PID + "'";
+            SqlConnection con = new SqlConnection(ConnectionString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = query;
+            cmd.Connection = con;
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+            con.Close();
+            bindProducts();
+            Page.RegisterStartupScript("UserMsg", "<Script language='javascript'>alert('" + "product details deleted successfully." + "');</script>");
+
         }
     }
 }

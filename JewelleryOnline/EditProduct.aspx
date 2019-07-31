@@ -4,6 +4,9 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
     <title></title>
     <style>
      #form1  {
@@ -143,11 +146,8 @@ a {
             <td>
              
                 <asp:DropDownList ID="dropBrandList" class="text-style" runat="server" Width="240px" Height="25px">
-                    <asp:ListItem>Kate Spade</asp:ListItem>
-                    <asp:ListItem>Cezanne</asp:ListItem>
-                    <asp:ListItem>CTID001</asp:ListItem>
-                    <asp:ListItem>CTID003</asp:ListItem>
-                </asp:DropDownList>
+                 
+              </asp:DropDownList>
                 
             </td>
 
@@ -168,7 +168,7 @@ a {
                 </div>
             </td>
             <td>
-                <asp:TextBox ID="txtProductID" class="text-style"  runat="server" Width="240px" Height="25px"></asp:TextBox>
+                <asp:TextBox  ID="txtProductID" ReadOnly="true" class="text-style"  runat="server" Width="240px" Height="25px"></asp:TextBox>
                 
             </td>
              <td>
@@ -203,51 +203,7 @@ a {
        </tr>
     </table>
  </div>
-        <div class="productDetails" align="center">
-            <asp:SqlDataSource ID="SqlDataSource2" runat="server"></asp:SqlDataSource>
-           
-         <br />
-            <br />
-           
-            <asp:DataList ID="DataList1" runat="server" BorderColor="Black" BorderStyle="None" Width="893px" OnSelectedIndexChanged="DataList1_SelectedIndexChanged">
-                <HeaderTemplate>
-                   <table>
-                <tr class="rowStyle">
-                <td>Product ID</td>
-                <td>Brand</td>
-                <td>Product Name</td>
-                <td>Sales Price</td>
-                <td>Available Quantity</td>
-
-                <td>Edit</td>
-                <td>Delete</td>
-                
-                </tr>
-                       </table>
-                   </HeaderTemplate>
-                <ItemTemplate>
-          <table>
-            
-                        <tr>
-                            <td><%#Eval("Product_Id")%>
-                            <td><%#Eval("Brand_Id")%>
-                            <td><%#Eval("Product_Name")%>
-                            <td><%#Eval("Sales_Price")%>
-
-                            <td><%#Eval("Available_Qty")%>
-
-                                <td>
-                    <asp:ImageButton ID="EdtButton1" ImageUrl="~/images/editBold.png"  runat="server" align="centre" Height="17px" Width="20px" OnClick="EdtButton1_Click"/> </td>
-
-                <td> <asp:ImageButton ID="DltButton1" ImageUrl="~/images/delete.png"  runat="server" align="centre" Height="17px" Width="20px" OnClick="btnDeleteProduct_Click"/></td>
-                            
-                 </tr>
-                </table>
-              </ItemTemplate>
-
-            </asp:DataList>
-            <br />
-        </div>
+        
  
     </form>
 </body>

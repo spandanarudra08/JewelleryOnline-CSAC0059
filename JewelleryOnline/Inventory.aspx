@@ -70,6 +70,10 @@ a {
                 <asp:Button  ID="Button2" class="btnStyle" runat="server" Text="Add Product" OnClick="BtnAdd2_Click"  />
              </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
          <br/>
+        <div id = "divmsg" style = "text-align: center" >
+   
+                   <asp:Label ID = "lblMsg" class="succMsg" runat="server"  />
+            </div>
         <div >
         <table align="center">
 
@@ -94,7 +98,7 @@ a {
             </td>
         </tr>
             <tr>
-                <asp:Label ID="lblmsg"  runat="server" Text="Label" style="color:Red;  font-weight:bold; font-display:block;"></asp:Label>
+                <h1 style="color:Red; font-weight:bold; text-align:center";>Inventory has no data</h1>
                 </tr>
     </table>
            

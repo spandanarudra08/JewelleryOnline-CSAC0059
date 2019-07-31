@@ -53,8 +53,9 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-            <table>
+            <div>
+        </div>
+           <table>
             <tr>
                 <td>
 
@@ -82,7 +83,7 @@
             <td class="auto-style3">
                 <asp:TextBox ID="txtUsername" class="text-style" runat="server" placeholder="Enter Your Username"
                      ToolTip="Enter Your Username" Width="240px" Height="30px"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="rfvUsername" runat="server" ControlToValidate="txtUsername" ErrorMessage="Please Enter Valid Username"></asp:RequiredFieldValidator>
+                <asp:RequiredFieldValidator ID="rfvUsername" runat="server" ControlToValidate="txtUsername" style="color:red;" ErrorMessage="Please Enter Valid Username"></asp:RequiredFieldValidator>
             </td>
         </tr>
         <tr>
@@ -94,7 +95,7 @@
             <td class="auto-style4">
                 <asp:TextBox ID="txtPassword" class="text-style" placeholder="Enter Your Password" TextMode="Password" runat="server"
                     ToolTip="Enter Your Password" Width="240px" Height="30px"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="rfvPAssword" runat="server" ControlToValidate="txtPassword" ErrorMessage="Please Enter Valid Password"></asp:RequiredFieldValidator>
+                <asp:RequiredFieldValidator ID="rfvPAssword" runat="server" ControlToValidate="txtPassword" style="color:red;" ErrorMessage="Please Enter Valid Password"></asp:RequiredFieldValidator>
             </td>
         </tr>
          <tr>

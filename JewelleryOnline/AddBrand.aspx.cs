@@ -17,7 +17,7 @@ namespace JewelleryOnline
         {
             if (!IsPostBack)
             {
-                BindProducts();
+                bindBrands();
             }
 
         }
@@ -30,7 +30,7 @@ namespace JewelleryOnline
         {
             lblMsg.Visible = false;
 
-            string query = "insert into Brand_Details values('" + txtBrandID.Text + "','" + txtBrandname.Text + "','" + txtNoOfProducts.Text + "')";
+            string query = "insert into Brand_Details values('" + txtBrandname.Text + "','" + txtNoOfProducts.Text + "')";
             SqlConnection con = new SqlConnection(ConnectionString);
             SqlCommand cmd = new SqlCommand();
             cmd.CommandText = query;
@@ -39,12 +39,12 @@ namespace JewelleryOnline
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);
             con.Close();
-            BindProducts();
+            bindBrands();
             lblMsg.Visible = true;
             lblMsg.Text = "Brand " + txtBrandname.Text + " added successfully";
         }
 
-        private void BindProducts()
+        private void bindBrands()
         {
             string query = "select Brand_Id,Brand_Name,NumberOfProducts from Brand_Details";
             SqlConnection con = new SqlConnection(ConnectionString);
@@ -60,28 +60,30 @@ namespace JewelleryOnline
             con.Close();
         }
 
-        protected void EdtButton1_Click(object sender, ImageClickEventArgs e)
+        protected void EdtButton1_Click(object sender, EventArgs e)
         {
+            Button btn = sender as Button;
+            Session["EditBrandId"] = btn.CommandArgument.ToString();
+            
             Response.Redirect("Edit Brand.aspx");
         }
         protected void btnDeleteBrand_Click(object sender, ImageClickEventArgs e)
         {
-            string query = "delete from Brand_Details where Brand_Id='" + txtBrandID.Text + "'";
+            Button btn = sender as Button;
+            string BrandId = btn.CommandArgument.ToString();
+            string query = "delete from Brand_Details where Brand_Id='" + BrandId + "'";
             SqlConnection con = new SqlConnection(ConnectionString);
+            
             SqlCommand cmd = new SqlCommand();
             cmd.CommandText = query;
             cmd.Connection = con;
-
             DataTable dt = new DataTable();
-
-
             SqlDataAdapter da = new SqlDataAdapter(cmd);
-
-
             da.Fill(dt);
-            DataList1.DataSource = dt;
-            DataList1.DataBind();
             con.Close();
+            bindBrands();
+            Page.RegisterStartupScript("UserMsg", "<Script language='javascript'>alert('" + "Brand details deleted successfully." + "');</script>");
+
         }
     }
 }

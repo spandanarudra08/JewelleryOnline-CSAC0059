@@ -4,6 +4,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <title></title>
     <style>
    #form1  {
@@ -14,7 +16,7 @@
    #nav{
         height: 140px;
         
-      
+       
     }
     #nav ul{
         list-style:none;
@@ -40,35 +42,35 @@ a {
   background-color:#74607c ;
    
 }
-   .logo{
+  #form1 .logo{
              display: flex;
     align-items: center;
     justify-content: center;
     margin-left:400px;
         }
    .btnStyle{
-       width: 120px;
+       width: 140px;
             height: 30px;
             font-size:medium;
             color:black;
           
    }
- #productDetails  table {
+ #productData  table {
        
   font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 100%;
 }
 
- #productDetails td, th {
-  border: 1px solid #dddddd;
+ #productData table td{
+  width: 60px;
   text-align: center;
   padding: 8px;
 }
 
- #productDetails tr:nth-child(even) {
-  background-color: #dddddd;
-}
+.rowStyle {
+     background-color: #dddddd;
+ }
 
 </style>
 </head>
@@ -103,72 +105,65 @@ a {
         </h2>
          <div align="right" style="padding-bottom:20px">
          
-                <asp:Button  ID="Button1" class="btnStyle"  runat="server" Text="Add Product"  />
+                <asp:Button  ID="Button1" class="btnStyle"  runat="server" Text="Add Product"  OnClick="btnAddProduct_Click" />
             
              </div>
-        <div></div>
-    <div  id="productDetails" align="center" >
-        <table>
-            <tr>
-                <th>Product ID</th>
-                <th>Brand</th>
-                <th>Product Name</th>
-                <th>Sales Price</th>
-                <th>Available Quantity</th>
-
-                <th>Edit</th>
-                <th>Delete</th>
-            </tr>
-            <tr>
-                <td>PDT001</td>
-                <td>Kate Spade</td>
-                <td>Princess Stud Earrings</td>
+ 
+     <div id="ProductData" align="center">
+        <asp:SqlDataSource ID="SqlDataSource2" runat="server"></asp:SqlDataSource>
+           
+        
+            <br />
+            <br />
+            <asp:DataList ID="DataList1" runat="server" BorderColor="Black" BorderStyle="None" Width="893px" OnSelectedIndexChanged="DataList1_SelectedIndexChanged1">
+               <HeaderTemplate>
+                   <table>
+                <tr class="rowStyle">
+                <td>Product ID</td>
+                <td>Brand Name</td>
+                    <td>Product Name</td>
+                    <td>Sales Price</td>
+                    <td>Available Quantity</td>
+                <td>Edit</td>
+                <td>Delete</td>
                 
-                <td>160.99</td>
-                <td>12</td>
-                <td><asp:Image ID="Image3" ImageUrl="~/images/editBold.png" runat="server" align="centre" Height="17px" Width="20px" /></td>
-
-                <td><asp:Image ID="Image1" ImageUrl="~/images/delete.png" runat="server" align="centre" Height="17px" Width="20px" /></td>
-  
-            </tr>
-            <tr>
-                <td>PDT002</td>
-                <td>Cezanne</td>
-                <td>Cuff Bracelet</td>
+                </tr>
+                       </table>
+                   </HeaderTemplate>
+                <ItemTemplate>
+                    <table>
                 
-                <td>270.99</td>
-                <td>9</td>
-                <td><asp:Image ID="Image4" ImageUrl="~/images/editBold.png" runat="server" align="centre" Height="17px" Width="20px" /></td>
+                
+                         
+                        <tr>
+                            <td><%#Eval("Product_Id")%>
+                            <td><%#Eval("Brand_Name")%>
+                            <td><%#Eval("Product_Name")%>
+                            <td><%#Eval("Brand_Name")%>
+                            <td><%#Eval("Sales_Price")%>
+                            <td><%#Eval("Available_Qty")%>
+                           
 
-                <td><asp:Image ID="Image5" ImageUrl="~/images/delete.png" runat="server" align="centre" Height="17px" Width="20px" /></td>
-  
-            </tr>
-            <tr>
-                <td>PDT003</td>
-                <td>Swarovski</td>
-                <td>26* Crystal Charm</td>
-                <td>190.99</td>
-                <td>3</td>
 
-                <td><asp:Image ID="Image6" ImageUrl="~/images/editBold.png" runat="server" align="centre" Height="17px" Width="20px" /></td>
+                            
+                             <td><asp:Button ID="EditButton" runat="server" Text="Edit" OnClick="BtnEdit_Click" 
+            CommandArgument='<%# Eval("Product_Id") %>'/>
 
-                <td><asp:Image ID="Image7" ImageUrl="~/images/delete.png" runat="server" align="centre" Height="17px" Width="20px" /></td>
-  
-            </tr>
-            <tr>
-                <td>PDT004</td>
-                <td>Kate Spade</td>
-                <td>Heart Necklace</td>
-                <td>300.99</td>
-                <td>18</td>
+                                </td>
+                <td> 
+                    <asp:Button ID="Button1" runat="server" Text="Delete" OnClick="BtnDelete_Click" 
+            CommandArgument='<%# Eval("Product_Id") %>'/>
+                </td>
+                            
+                             
+                      </tr>
+                
+                    </table>
+                    </ItemTemplate>
 
-                <td><asp:Image ID="Image8" ImageUrl="~/images/editBold.png" runat="server" align="centre" Height="17px" Width="20px" /></td>
-
-                <td><asp:Image ID="Image9" ImageUrl="~/images/delete.png" runat="server" align="centre" Height="17px" Width="20px" /></td>
-  
-            </tr>
-    </table>
-  </div>
+            </asp:DataList>
+            <br />
+        </div>
     </form>
 </body>
 </html>

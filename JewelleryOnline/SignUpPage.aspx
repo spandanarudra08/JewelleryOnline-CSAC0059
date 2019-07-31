@@ -142,13 +142,13 @@
                
                 <tr>
                     <td>
-                        <asp:Label ID="Cmsg" runat="server" Text=""></asp:Label>
+                        <asp:Label ID="Cmsg" class="succMsg" runat="server"  Visible="false"></asp:Label>
                     </td>
                   
           
       
              <td  class="auto-style2" >
-                <asp:Button ID="Button1" class="btn-style" runat="server" Text="Signup" OnClick="Button1_Click"  />
+                <asp:Button ID="btnSignup" class="btn-style" runat="server" Text="Signup" OnClick="btnSignup_Click"  />
             
                     </td>
             </tr>

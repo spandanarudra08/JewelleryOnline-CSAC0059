@@ -4,6 +4,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <title></title>
 <style>
     #form1  {
@@ -152,7 +154,7 @@ a {
                 </div>
             </td>
             <td class="auto-style4">
-                <asp:TextBox ID="txtBrandID" class="text-style"  runat="server" Width="200px" Height="30px"></asp:TextBox>
+                <asp:TextBox ID="txtBrandID" ReadOnly="true" class="text-style"  runat="server" Width="200px" Height="30px"></asp:TextBox>
                 
             </td>
         </tr>

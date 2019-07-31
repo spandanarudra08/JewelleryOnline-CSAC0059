@@ -23,8 +23,10 @@ namespace JewelleryOnline
         //    }
         //}
 
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void btnSignup_Click(object sender, EventArgs e)
         {
+            
+
             bool correct = CaptchaBox.Validate(txtCaptcha.Text);
             txtCaptcha.Text = null;
             if (correct)
@@ -50,21 +52,30 @@ namespace JewelleryOnline
 
                     cmd.ExecuteNonQuery();
                     string message = (string)cmd.Parameters["@ERROR"].Value;
-
+                   
+                    lblmsg.Text = message;
                     con.Close();
+                    if (message.TrimEnd() == UserName + " Already Exists")
+                    {
+                        Page.RegisterStartupScript("UserMsg", "<Script language='javascript'>alert('" + message + "');</script>");
+                    }
+                    else
+                        Response.Redirect("Login.aspx");
+
 
                 }
                 else
                 {
                     Page.RegisterStartupScript("UserMsg", "<Script language='javascript'>alert('" + "Password mismatch" + "');</script>");
                 }
-                lblmsg.Text = message;
+               
             }
+            
             else
             {
                 Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "Information", "alert('Invalid captcha.')", true);
             }
-
+           
         }
     }
 }

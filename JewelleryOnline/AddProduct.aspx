@@ -4,6 +4,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <title></title>
 <style>
      #form1  {
@@ -51,8 +53,7 @@ a {
        
   font-family: arial, sans-serif;
   border-collapse: collapse;
-  width: 100%;
-}
+  }
 
 .productDetails table td {
   width: 60px;
@@ -134,6 +135,7 @@ a {
         </h2>
          <div id="txtBrand">
              <asp:Label ID="lblMsg" runat="server" Visible="false"/>
+             <asp:Label ID="lblProductEditMsg" runat="server" ></asp:Label>
        <table>
           <tr>
             <td>
@@ -210,7 +212,7 @@ a {
          <br />
             <br />
            
-            <asp:DataList ID="DataList1" runat="server" BorderColor="Black" BorderStyle="None" Width="893px" OnSelectedIndexChanged="DataList1_SelectedIndexChanged">
+            <asp:DataList ID="DataList1" runat="server" BorderColor="Black" BorderStyle="None" Width="965px" OnSelectedIndexChanged="DataList1_SelectedIndexChanged">
                 <HeaderTemplate>
                    <table>
                 <tr class="rowStyle">
@@ -239,9 +241,16 @@ a {
                             <td><%#Eval("Available_Qty")%>
 
                                 <td>
-                    <asp:ImageButton ID="EdtButton1" ImageUrl="~/images/editBold.png"  runat="server" align="centre" Height="17px" Width="20px" OnClick="EdtButton1_Click"/> </td>
+                    <%--<asp:ImageButton ID="EdtButton1" ImageUrl="~/images/editBold.png"  runat="server" align="centre" Height="17px" Width="20px" OnClick="EdtButton1_Click(<%#Eval("Product_Id")%>)"/>--%> 
+                                <%--<asp:LinkButton ID="EditButton" runat="server" CommandName="Edit" CommandArgument='<%#Eval("Product_Id")%>'  OnClick="Btn_Click" Text="Edit" />--%>
+<asp:Button ID="EditButton" runat="server" Text="Edit" OnClick="BtnEdit_Click" 
+            CommandArgument='<%# Eval("Product_Id") %>'/>
 
-                <td> <asp:ImageButton ID="DltButton1" ImageUrl="~/images/delete.png"  runat="server" align="centre" Height="17px" Width="20px" OnClick="btnDeleteProduct_Click"/></td>
+                                </td>
+                <td> 
+                    <asp:Button ID="Button1" runat="server" Text="Delete" OnClick="BtnDelete_Click" 
+            CommandArgument='<%# Eval("Product_Id") %>'/>
+                </td>
                             
                  </tr>
                 </table>
@@ -250,85 +259,7 @@ a {
             <br />
         </div>
 
-        <div class="productDetails">
-             <asp:gridview ID="Gridview1" runat="server" AutoGenerateColumns="False" onrowdatabound="GridView1_RowDataBound" OnPageIndexChanging="Gridview1_PageIndexChanging" OnRowCancelingEdit="Gridview1_RowCancelingEdit" OnRowCommand="Gridview1_RowCommand" OnRowDeleting="Gridview1_RowDeleting" OnRowEditing="Gridview1_RowEditing" OnRowUpdating="Gridview1_RowUpdating" ShowFooter="True" BackColor="#DEBA84" BorderColor="#DEBA84" BorderStyle="None" BorderWidth="1px" CellPadding="3" CellSpacing="2" ShowHeaderWhenEmpty="True" Width="100%">
-      <Columns>
-          <asp:TemplateField HeaderText="Id">
-              <EditItemTemplate>
-                  <asp:Label ID="lbleditid" runat="server" Text='<%# Bind("PID") %>'></asp:Label>
-              </EditItemTemplate>
-              <ItemTemplate>
-                  <asp:Label ID="lblid" runat="server" Text='<%# Bind("PID") %>'></asp:Label>
-              </ItemTemplate>
-          </asp:TemplateField>
-          <asp:TemplateField HeaderText="Product Name">
-              <EditItemTemplate>
-                  <asp:TextBox ID="txtProductname" runat="server" Text='<%# Bind("ProductName") %>'></asp:TextBox>
-              </EditItemTemplate>
-              <FooterTemplate>
-                  <asp:TextBox ID="txtnameProductname1" runat="server"></asp:TextBox>
-              </FooterTemplate>
-              <ItemTemplate>
-                  <asp:Label ID="lblProductname" runat="server" Text='<%# Bind("ProductName") %>'></asp:Label>
-              </ItemTemplate>
-          </asp:TemplateField>
-          <asp:TemplateField HeaderText="Brand ID">
-              <EditItemTemplate>
-                  <asp:TextBox ID="txtBrandId" runat="server" Text='<%# Bind("BrandId") %>'></asp:TextBox>
-              </EditItemTemplate>
-              <FooterTemplate>
-                  <asp:TextBox ID="txtBrand1" runat="server"></asp:TextBox>
-              </FooterTemplate>
-              <ItemTemplate>
-                 <asp:DropDownList ID="ddlBrandId" runat="server">  
-                        </asp:DropDownList> 
-              </ItemTemplate>
-          </asp:TemplateField>
-          <asp:TemplateField HeaderText="Sales Price">
-              <EditItemTemplate>
-                  <asp:TextBox ID="txtSalesPrice" runat="server" TextMode="Number" Text='<%# Bind("SalesPrice") %>'></asp:TextBox>
-              </EditItemTemplate>
-              <FooterTemplate>
-                  <asp:TextBox ID="txtSalesPrice1" TextMode="Number"
-                      runat="server"></asp:TextBox>
-              </FooterTemplate>
-              <ItemTemplate>
-                  <asp:Label ID="lblPrice" runat="server" Text='<%# Bind("SalesPrice") %>'></asp:Label>
-              </ItemTemplate>
-          </asp:TemplateField>
-          <asp:TemplateField HeaderText="Edit" ShowHeader="False">
-                <EditItemTemplate>
-                  <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="True"
-                        CommandName="Update" Text="Update" ></asp:LinkButton>
-                    &nbsp;
-                  <asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel"></asp:LinkButton>
-                </EditItemTemplate>
-                <FooterTemplate>
-                  <asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False"
-                        CommandName="AddNew" Text="Add New" ></asp:LinkButton>
-                </FooterTemplate>
-                <ItemTemplate>
-                  <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False"
-                        CommandName="Edit" Text="Edit"></asp:LinkButton>
-                </ItemTemplate>
-                </asp:TemplateField>
-                <asp:CommandField HeaderText="Delete" ShowDeleteButton="True"  ShowHeader="True" />
-                <asp:CommandField HeaderText="Select" ShowSelectButton="True"  ShowHeader="True" />
-
-      </Columns>
-
-      <FooterStyle BackColor="#F7DFB5" ForeColor="#8C4510" />
-      <HeaderStyle BackColor="#A55129" Font-Bold="True" ForeColor="White" />
-      <PagerStyle ForeColor="#8C4510" HorizontalAlign="Center" />
-      <RowStyle BackColor="#FFF7E7" ForeColor="#8C4510" />
-      <SelectedRowStyle BackColor="#738A9C" Font-Bold="True" ForeColor="White" />
-      <SortedAscendingCellStyle BackColor="#FFF1D4" />
-      <SortedAscendingHeaderStyle BackColor="#B95C30" />
-      <SortedDescendingCellStyle BackColor="#F1E5CE" />
-      <SortedDescendingHeaderStyle BackColor="#93451F" />
-
-  </asp:gridview>
-        </div>
+        
 </form>
 </body>
 </html>

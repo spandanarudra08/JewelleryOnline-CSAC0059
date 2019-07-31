@@ -4,6 +4,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <title></title>
     <style>
         #form1 {
@@ -160,7 +162,7 @@
                         <asp:TextBox ID="txtBrandID" class="text-style" runat="server" Width="240px" Height="30px"></asp:TextBox>
 
                     </td>
-                </tr>
+                </!tr>
                 <tr>
                     <td class="auto-style1">
                         <div style="font-size: large; color: black; font-weight: bold">
@@ -222,11 +224,11 @@
                                 <td><%#Eval("Brand_Name")%>
                                     <td><%#Eval("NumberOfProducts")%>
                                         <td>
-                                            <asp:ImageButton ID="EdtButton1" ImageUrl="~/images/editBold.png" runat="server" align="centre" Height="17px" Width="20px" OnClick="EdtButton1_Click" />
+                                            <asp:Button ID="EditButton" runat="server" Text="Edit" OnClick="EdtButton1_Click" CommandArgument='<%# Eval("Brand_Id") %>'/>
                                         </td>
 
                                         <td>
-                                            <asp:ImageButton ID="DltButton1" ImageUrl="~/images/delete.png" runat="server" align="centre" Height="17px" Width="20px" OnClick="btnDeleteBrand_Click" />
+                                            <asp:ImageButton ID="DltButton1" ImageUrl="~/images/delete.png" runat="server" align="centre" Height="17px" Width="20px" OnClick="btnDeleteBrand_Click" CommandArgument='<%# Eval("Brand_Id") %>'/>
                                         </td>
                         </tr>
                     </table>
