@@ -35,6 +35,16 @@
           
         }
         
+  body {
+    background-image:url('images/chaingold6.png');
+    background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+ 
+ 
+}
+        
+        
         .auto-style1 {
             height: 71px;
         }
@@ -52,7 +62,9 @@
 </style>
 </head>
 <body>
+    
     <form id="form1" runat="server">
+
             <div>
         </div>
            <table>

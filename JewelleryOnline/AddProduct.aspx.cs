@@ -25,7 +25,7 @@ namespace JewelleryOnline
                 SqlConnection con = new SqlConnection(ConnectionString);
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = query;
-                cmd.Connection = con;
+                cmd.Connection = con; 
                 DataTable dt = new DataTable();
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 da.Fill(dt);

@@ -31,6 +31,16 @@
   border-right:1px solid #bbb;
  
 }
+
+    body {
+    background-image:url('images/jewellery12.png');
+    background-position: center;
+   background-size: cover;
+  background-repeat: no-repeat;
+
+ 
+ 
+}
 a {
   display: block;
   color: white;
@@ -234,7 +244,7 @@ a {
             
                         <tr>
                             <td><%#Eval("Product_Id")%>
-                            <td><%#Eval("Brand_Id")%>
+                            <td><%#Eval("Brand_Name")%>
                             <td><%#Eval("Product_Name")%>
                             <td><%#Eval("Sales_Price")%>
 

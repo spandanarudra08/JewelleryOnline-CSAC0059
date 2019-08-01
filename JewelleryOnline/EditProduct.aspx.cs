@@ -38,7 +38,7 @@ namespace JewelleryOnline
                 productDetails.Sales_Price = txtSales.Text;
                 productDetails.Brand_Id = Convert.ToInt32( dropBrandList.SelectedValue);
                 dBEntities.SaveChanges();
-                Response.Redirect("AddProduct.aspx", false);
+                Response.Redirect("AddProduct.aspx");
 
                 //store string in session which will be accessed on next page  
 
@@ -47,7 +47,7 @@ namespace JewelleryOnline
             }
             else
             {
-                Response.Redirect("GetData.aspx", false);
+                Response.Redirect("AddProduct.aspx");
                 Session["ProductEditMessage"] = "Product Details not found";
             }
         }

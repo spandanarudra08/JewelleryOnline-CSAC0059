@@ -46,19 +46,25 @@ namespace JewelleryOnline
 
         protected void btnUpdateBrand_Click(object sender, EventArgs e)
         {
-            string query = "update Brand_Details set Brand_Name='" + txtBrandname.Text + "' where Brand_ID='" + txtBrandID.Text + "'";
+            int prodID = Convert.ToInt32(txtBrandID.Text);
+            var productDetails = dBEntities.Brand_Details.Where(p => p.Brand_Id == prodID).FirstOrDefault();
+            if (productDetails != null)
+            {
+                productDetails.Brand_Name = txtBrandname.Text;
+               
+                dBEntities.SaveChanges();
+                Response.Redirect("AddBrand.aspx", false);
 
-            SqlConnection con = new SqlConnection(ConnectionString);
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = query;
-            cmd.Connection = con;
-            DataTable dt = new DataTable();
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            da.Fill(dt);
-            DataList1.DataSource = dt;
-            DataList1.DataBind();
+                //store string in session which will be accessed on next page  
 
-            con.Close();
+                Session["BrandEditMessage"] = "Brand Details Updated successfully.";
+
+            }
+            else
+            {
+                Response.Redirect("GetData.aspx", false);
+                Session["BrandEditMessage"] = "Brand Details not found";
+            }
 
 
         }
@@ -66,21 +72,7 @@ namespace JewelleryOnline
 
         protected void btnCancelBrand_Click(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                string query = "select Brand_Id,Brand_Name from Brand_Details";
-                SqlConnection con = new SqlConnection(ConnectionString);
-                SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = query;
-                cmd.Connection = con;
-                DataTable dt = new DataTable();
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                da.Fill(dt);
-                DataList1.DataSource = dt;
-                DataList1.DataBind();
-
-                con.Close();
-            }
+            Response.Redirect("AddBrand.aspx");
         }
 
 
